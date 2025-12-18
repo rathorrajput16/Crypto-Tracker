@@ -79,6 +79,26 @@
 .table-layout p {
   margin: 0;
 }
+.table-layout :last-child {
+  border:none;
+}
+.table-layout div {
+  display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.table-layout img {
+    width: 25px;
+}
+.table-layout .green {
+    color:#22c55e;
+    text-align: center;
+}
+.table-layout .red {
+    color:crimson;
+    text-align: center;
+}
+
 
 /* Responsive (mobile) */
 @media (max-width: 768px) {
