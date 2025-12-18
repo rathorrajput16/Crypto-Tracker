@@ -1,16 +1,35 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './Home.css'
 import { CoinContext } from '../../context/CoinContext'
-
+import { Link} from 'react-router-dom'
 const Home = () => {
 
 const{allcoin,currency}=useContext(CoinContext);
 
 const [displayCoin,setDisplayCoin]=useState([]);
 
-useEffect(()=>{
-setDisplayCoin(allcoin);
-},[allcoin])
+const[input,setInput]=useState('');
+const inputHandler=(event)=>{
+    setInput(event.target.value);
+    
+}
+const searchHandler=async(event)=>{
+event.preventDefault();
+
+}
+useEffect(() => {
+  if (input === "") {
+    setDisplayCoin(allcoin);
+  } else {
+    const coins = allcoin.filter(
+      (item) =>
+        item.name.toLowerCase().includes(input.toLowerCase()) ||
+        item.symbol.toLowerCase().includes(input.toLowerCase())
+    );
+    setDisplayCoin(coins);
+  }
+}, [input, allcoin]);
+
 
   return (
     <div className='home'>
@@ -20,8 +39,14 @@ setDisplayCoin(allcoin);
           Welcome to the world's largest cryptocurrency marketplace.
           Sign up to explore more about cryptos.
         </p>
-        <form>
-          <input type="text" placeholder="Search crypto.." />
+        <form onSubmit={searchHandler}>
+          <input onChange={inputHandler} list="coinlist" value={input} type="text" placeholder="Search crypto.."  />
+          <datalist id="coinlist">
+        {allcoin.map((item, index)=>(
+        <option key={index} value={item.name}/>
+          ))}
+        </datalist>
+
           <button type="submit">Search</button>
         </form>
       </div>
@@ -36,8 +61,8 @@ setDisplayCoin(allcoin);
 </div>
    <div>
     {
-         displayCoin.slice(0,10).map((item, index)=>(
-  <div className="table-layout" key={index}>
+         displayCoin.slice(0, input ? displayCoin.length : 10).map((item, index)=>(
+  <Link to={`/coin/${item.id}`} className="table-layout" key={index}>
     <p>{item.market_cap_rank}</p>
     <div>
       <img src={item.image} alt="" />
@@ -55,7 +80,7 @@ setDisplayCoin(allcoin);
   {(item.market_cap / 1e9).toFixed(2)}B
 </p>
 
-   </div>
+   </Link>
    ))
 }
     </div>
