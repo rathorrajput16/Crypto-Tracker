@@ -1,0 +1,19 @@
+.footer {
+  width: 100%;
+  padding: 20px 0;
+  background-color: #0f0f0f; /* dark theme */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+  color: #9ca3af; /* soft gray */
+  text-align: center;
+}
+.footer p:hover {
+  color: #ffffff;
+  transition: color 0.3s ease;
+}

@@ -6,6 +6,7 @@ import Home from './pages/Home/Home';
 import Trending from './pages/Trending/Trending';
 import Coin from './pages/Coin/Coin';
 import About from './pages/About/About';
+import Footer from './components/Footer/Footer';
 const App = () => {
   return (
     <div>
@@ -16,6 +17,7 @@ const App = () => {
           <Route path='/trending' element={<Trending/>}/>
           <Route path='/about' element={<About/>}/>
       </Routes>
+      <Footer/>
     </div>
   )
 }
